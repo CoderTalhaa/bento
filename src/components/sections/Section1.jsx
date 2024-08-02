@@ -40,7 +40,14 @@ export default function Section1() {
         {activeSection === "default" && (
           <section className="min-h-[100svh] py-[25px] flex">
             <div className="w-full border border-[#242424] mx-3 p-4 rounded-[32px]">
-              <div className="h-full grid grid-cols-12 gap-3">
+              <motion.div
+                initial="initial"
+                animate="animate"
+                transition={{
+                  staggerChildren: 0.05,
+                }}
+                className="h-full grid grid-cols-12 gap-3"
+              >
                 <IntroBlock />
                 <PersonalImage />
                 <About setAbout={handleAboutClick} />
@@ -51,7 +58,7 @@ export default function Section1() {
                 <Gumroad />
                 <Contact copyToClipboard={copyToClipboard} copied={copied} />
                 <SocialLinks />
-              </div>
+              </motion.div>
             </div>
           </section>
         )}
@@ -67,7 +74,25 @@ export default function Section1() {
 
 const Block = ({ className, ...rest }) => {
   return (
-    <div
+    <motion.div
+      variants={{
+        initial: {
+          scale: 0.5,
+          y: 50,
+          opacity: 0,
+        },
+        animate: {
+          scale: 1,
+          y: 0,
+          opacity: 1,
+        },
+      }}
+      transition={{
+        type: "spring",
+        mass: 3,
+        damping: 50,
+        stiffness: 300,
+      }}
       className={twMerge(
         " rounded-[32px] border border-[#242424] bg-grid p-8 text-primary  ",
         className
@@ -93,15 +118,13 @@ const IntroBlock = () => {
 const About = ({ setAbout }) => {
   return (
     <Block className="col-span-12 md:col-span-9 xl:col-span-4 p-5 flex flex-col justify-around  hover:bg-secondary/20  group ">
-      <div className="" onClick={setAbout}>
-        <h1 className="text-secondary tracking-widest leading-5">ABOUT</h1>
-        <p className="text-2xl leading-relaxed  ">
-          Passionate in creating animation and 3D websites.
-        </p>
-        <div className="flex justify-end ">
-          <div className="border border-[#242424] p-3 rounded-full group-hover:-rotate-45 transition-transform duration-500">
-            <FaArrowRight />
-          </div>
+      <h1 className="text-secondary tracking-widest leading-5">ABOUT</h1>
+      <p className="text-2xl leading-relaxed  ">
+        Passionate in creating animation and 3D websites.
+      </p>
+      <div className="flex justify-end ">
+        <div className="border border-[#242424] p-3 rounded-full group-hover:-rotate-45 transition-transform duration-500">
+          <FaArrowRight />
         </div>
       </div>
     </Block>
@@ -128,15 +151,13 @@ const PersonalImage = () => {
 const Projects = ({ setProject }) => {
   return (
     <Block className="col-span-12 md:col-span-12 xl:col-span-5 xl:row-start-1 xl:col-start-5 flex flex-col justify-around  hover:bg-secondary/20  group">
-      <div onClick={setProject}>
-        <h1 className="text-secondary tracking-widest leading-5 text-xl">
-          Project
-        </h1>
-        <p className="text-2xl leading-relaxed   ">View my project here!</p>
-        <div className="flex flex-col items-end ">
-          <div className="border border-[#242424] p-3 rounded-full group-hover:-rotate-45 transition-transform duration-500">
-            <FaArrowRight />
-          </div>
+      <h1 className="text-secondary tracking-widest leading-5 text-xl">
+        Project
+      </h1>
+      <p className="text-2xl leading-relaxed   ">View my project here!</p>
+      <div className="flex flex-col items-end ">
+        <div className="border border-[#242424] p-3 rounded-full group-hover:-rotate-45 transition-transform duration-500">
+          <FaArrowRight />
         </div>
       </div>
     </Block>
@@ -175,7 +196,7 @@ const Project3 = () => {
       <div className="relative w-full h-full">
         <div className="xl:absolute h-full w-full top-0 left-0">
           <img
-            src="/img1.png"
+            src="/sidebar.png"
             alt="project1"
             className=" h-full w-full object-cover"
           />
@@ -189,8 +210,10 @@ const TechStack = () => {
   return (
     <Block className="col-span-12 md:col-span-12 xl:col-span-3 flex flex-col justify-evenly ">
       <h1 className="text-4xl md:mb-4">Stack I use</h1>
-      <div className="  ">
-        <Slider />
+      <div className="w-full  relative overflow-hidden">
+        <div className=" flex justify-start w-[1100px]  items-center  whitespace-nowrap gap-3 lg:gap-8 xl:gap-3   ">
+          <Slider />
+        </div>
       </div>
     </Block>
   );
@@ -199,10 +222,21 @@ const TechStack = () => {
 const ThreeModel = () => {
   return (
     <Block className="col-span-12 md:col-span-12 xl:col-span-3 p-0 overflow-clip xl:col-start-10 xl:row-start-2 xl:row-span-2 ">
-      <div className="relative h-full">
-        <div className=" xl:absolute h-full w-full top-0 left-0">
+      <div className="relative xl:w-full xl:h-full h-[200px]  ">
+        <motion.div
+          initial={{
+            display: "none",
+            opacity: 0,
+          }}
+          animate={{
+            display: "block",
+            opacity: 1,
+          }}
+          transition={{ delay: 2, duration: 1, ease: "easeInOut" }}
+          className="absolute top-0 left-0 w-full h-full"
+        >
           <World />
-        </div>
+        </motion.div>
       </div>
     </Block>
   );
@@ -245,7 +279,13 @@ const SocialLinks = () => {
     <Block className="col-span-12 xl:col-span-3  bg-transparent border-none p-0 xl:row-start-1 xl:col-start-10">
       <div className="grid grid-cols-5 xl:grid-cols-3 xl:h-full xl:gap-3 h-[200px] gap-2">
         <div className="flex justify-center items-center border border-[#66666667] p-1 rounded-3xl bg-grid hover:bg-sky-500 transition-all duration-300">
-          <BsTwitterX size={36} />
+          <a
+            href="https://x.com/home"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsTwitterX size={36} />
+          </a>
         </div>
         <div
           className="flex justify-center items-center border border-[#66666667] p-1 rounded-3xl bg-grid
@@ -257,25 +297,45 @@ const SocialLinks = () => {
           className="flex justify-center items-center border border-[#66666667] p-1 rounded-3xl bg-grid
         hover:bg-blue-700 transition-all duration-300"
         >
-          <FaLinkedinIn size={36} />
+          <a
+            href="https://www.linkedin.com/in/talha-83984xb/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedinIn size={36} />
+          </a>
         </div>
         <div
           className="flex justify-center items-center border border-[#66666667] p-1 rounded-3xl bg-grid
         hover:bg-red-500 transition-all duration-300"
         >
-          <FiGithub size={36} />
+          <a
+            href="https://github.com/CoderTalhaa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiGithub size={36} />
+          </a>
         </div>
         <div
           className="flex justify-center items-center border border-[#66666667] p-1 rounded-3xl bg-grid
         hover:bg-green-500 transition-all duration-300"
         >
-          <TbBrandFiverr size={36} />
+          <a
+            href="https://www.fiverr.com/zeyrox_7?up_rollout=true"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <TbBrandFiverr size={36} />
+          </a>
         </div>
         <div
           className="hidden  xl:flex justify-center items-center border border-[#66666667] p-1 rounded-3xl bg-grid
         hover:bg-orange-700 transition-all duration-300"
         >
-          <MdOutlineEmail size={36} />
+          <a href="https://github.com/CoderTalhaa" target="blank">
+            <MdOutlineEmail size={36} />
+          </a>
         </div>
       </div>
     </Block>

@@ -15,12 +15,7 @@ export default function AboutInfo({ setAbout }) {
           </div>
           <div className=" h-full w-full  grid grid-cols-12 gap-3 bg-red-500 ">
             <IntroBlock />
-            <IntroBlock />
-            <IntroBlock />
-            <IntroBlock />
-            <IntroBlock />
-            <IntroBlock />
-            <IntroBlock />
+           
           </div>
         </div>
       </div>

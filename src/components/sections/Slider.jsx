@@ -1,32 +1,23 @@
-import React from "react";
-
 export default function Slider() {
   return (
-    <div className="logos overflow-hidden flex gap-[16px]">
-      <div class="logos-slide flex gap-[16px] animate-loop-scroll">
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-      </div>
-      <div class="logos-slide flex gap-[16px] animate-loop-scroll">
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-        <Img src="/react.png" />
-      </div>
-    </div>
+    <>
+      <Img src="/react.png" />
+      <Img src="/astro.png" />
+      <Img src="/blender.png" />
+      <Img src="/threejs.png" />
+      <Img src="/figma.png" />
+      <Img src="/nextjs.png" />
+      <Img src="/tailwind.png" />
+      <Img src="/framer.png" />
+      <Img src="/threejs.png" />
+    </>
   );
 }
 
 const Img = ({ src }) => {
   return (
-    <div className="bg-secondary rounded-3xl p-2">
-      <img src={src} alt="image" className="h-full" />
+    <div className="w-16  h-16  ">
+      <img src={src} alt="image" className="h-full w-full object-cover" />
     </div>
   );
 };

@@ -68,7 +68,7 @@ function Cubes({ gap = 0.1, stride = 4, displacement = 3, intensity = 1 }) {
       const col = Math.max(0.5, distInv) / 1.5;
       easing.dampC(
         child.color,
-        dist > displacement * 1.1 ? "white" : [col / 2, col * 2, col * 4],
+        dist > displacement * 1.1 ? "white" : [col / 0.1, col * 2, col * 1],
         0.1,
         delta
       );
